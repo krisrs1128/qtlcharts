@@ -6,10 +6,10 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   height = (ref = chartOpts != null ? chartOpts.height : void 0) != null ? ref : 560;
   width = (ref1 = chartOpts != null ? chartOpts.width : void 0) != null ? ref1 : 1050;
   margin = (ref2 = chartOpts != null ? chartOpts.margin : void 0) != null ? ref2 : {
-    left: 70,
+    left: 150,
     top: 40,
-    right: 5,
-    bottom: 70,
+    right: 75,
+    bottom: 25,
     inner: 5
   };
   corcolors = (ref3 = chartOpts != null ? chartOpts.corcolors : void 0) != null ? ref3 : ["darkslateblue", "white", "crimson"];
@@ -60,8 +60,8 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
   }).attr("stroke", "none").attr("stroke-width", 2).on("mouseover", function(d) {
     d3.select(this).attr("stroke", "black");
     corr_tip.show(d);
-    corrplot.append("text").attr("class", "corrlabel").attr("x", corXscale(d.col) + pixel_width / 2).attr("y", panelheight + margin.bottom * 0.2).text(data["var"][data.cols[d.col]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle");
-    return corrplot.append("text").attr("class", "corrlabel").attr("y", corYscale(d.row) + pixel_height / 2).attr("x", -margin.left * 0.1).text(data["var"][data.rows[d.row]]).attr("dominant-baseline", "middle").attr("text-anchor", "end");
+      corrplot.append("text").attr("class", "corrlabel").attr("x", corXscale(d.col) + pixel_width / 2).attr("y", panelheight + margin.bottom * 0.2).text(data["var"][data.cols[d.col]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("font-size", "10px");
+      return corrplot.append("text").attr("class", "corrlabel").attr("y", corYscale(d.row) + pixel_height / 2).attr("x", -margin.left * 0.1).text(data["var"][data.rows[d.row]]).attr("dominant-baseline", "middle").attr("text-anchor", "end").attr("font-size", "10px");
   }).on("mouseout", function(d) {
     corr_tip.hide(d);
     d3.selectAll("text.corrlabel").remove();
@@ -105,7 +105,7 @@ iplotCorr = function(widgetdiv, data, chartOpts) {
     d3.selectAll("line.axes").remove();
     xScale = d3.scale.linear().domain(d3.extent(data.dat[data.cols[i]])).range([margin.inner, panelwidth - margin.inner]);
     yScale = d3.scale.linear().domain(d3.extent(data.dat[data.rows[j]])).range([panelheight - margin.inner, margin.inner]);
-    scatterplot.append("text").attr("id", "xaxis").attr("class", "axes").attr("x", panelwidth / 2).attr("y", panelheight + margin.bottom * 0.7).text(data["var"][data.cols[i]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("fill", "slateblue");
+      scatterplot.append("text").attr("id", "xaxis").attr("class", "axes").attr("x", panelwidth / 2).attr("y", panelheight + margin.bottom * 0.7).text(data["var"][data.cols[i]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("fill", "slateblue");
     scatterplot.append("text").attr("id", "yaxis").attr("class", "axes").attr("x", -margin.left * 0.8).attr("y", panelheight / 2).text(data["var"][data.rows[j]]).attr("dominant-baseline", "middle").attr("text-anchor", "middle").attr("transform", "rotate(270," + (-margin.left * 0.8) + "," + (panelheight / 2) + ")").attr("fill", "slateblue");
     xticks = xScale.ticks(5);
     yticks = yScale.ticks(5);
